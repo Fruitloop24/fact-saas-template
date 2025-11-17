@@ -56,17 +56,18 @@ export default function Landing() {
   const description = config?.branding?.description || 'Describe what your product does in one compelling sentence.';
 
   useEffect(() => {
-    const fetchTiers = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/tiers`);
-        const data = await response.json();
-        setTiers(data.tiers || []);
-      } catch (err) {
-        console.error('Failed to fetch tiers:', err);
-      }
-    };
-    fetchTiers();
-  }, [API_URL]);
+    // Use tiers from config.json (already has user's configured tiers)
+    if (config?.tiers) {
+      const tiersData = config.tiers.map((tier: any) => ({
+        id: tier.name,
+        name: tier.displayName,
+        price: tier.price,
+        limit: tier.limit === null ? 'unlimited' : tier.limit,
+        hasPriceId: !!tier.stripePriceId,
+      }));
+      setTiers(tiersData);
+    }
+  }, [config]);
 
   const handleGetStarted = (tierId: string) => {
     if (user) {

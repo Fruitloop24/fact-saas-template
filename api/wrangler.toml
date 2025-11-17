@@ -2,10 +2,14 @@ name = "api-prev"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
-# KV namespace binding for usage tracking
+# KV namespace bindings
 [[kv_namespaces]]
 binding = "USAGE_KV"
 id = "2b116f97974a4461a03f91792198cefc"
+
+[[kv_namespaces]]
+binding = "TOKENS_KV"
+id = "1f71f940ccc043459b6049059fbac30b"
 
 [vars]
 # Non-secret variables
