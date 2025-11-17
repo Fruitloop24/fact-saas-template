@@ -78,7 +78,9 @@ export function getCorsHeaders(request: Request, env: Env): Record<string, strin
 	const isAllowedOrigin =
 		allowedOrigins.includes(origin) ||
 		// CF Pages: frontendv2-5j1.pages.dev (production + preview branches)
-		/^https:\/\/([a-z0-9]+\.)?frontendv2-5j1\.pages\.dev$/.test(origin);
+		/^https:\/\/([a-z0-9]+\.)?frontendv2-5j1\.pages\.dev$/.test(origin) ||
+		// Preview deployments: preview-{userId}-frontend.pages.dev
+		/^https:\/\/([a-z0-9]+\.)?preview-[a-z0-9-]+-frontend\.pages\.dev$/.test(origin);
 
 	// Debug logging (only in dev - remove for production if needed)
 	if (!isAllowedOrigin && origin) {
