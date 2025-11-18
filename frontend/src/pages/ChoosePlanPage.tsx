@@ -29,6 +29,7 @@ interface Tier {
   name: string;
   price: number;
   limit: number | 'unlimited';
+  features: string[];
   hasPriceId: boolean;
 }
 
@@ -56,6 +57,7 @@ export default function ChoosePlanPage() {
         name: tier.displayName,
         price: tier.price,
         limit: tier.limit === null ? 'unlimited' : tier.limit,
+        features: tier.features || [],
         hasPriceId: !!tier.stripePriceId,
         stripePriceId: tier.stripePriceId, // Keep for checkout!
       }));
@@ -204,18 +206,12 @@ export default function ChoosePlanPage() {
 
                 {/* Features */}
                 <ul className="mt-8 space-y-3">
-                  <li className="flex items-start text-slate-600 text-sm">
-                    <span className="mr-2">✓</span>
-                    <span>Feature one</span>
-                  </li>
-                  <li className="flex items-start text-slate-600 text-sm">
-                    <span className="mr-2">✓</span>
-                    <span>Feature two</span>
-                  </li>
-                  <li className="flex items-start text-slate-600 text-sm">
-                    <span className="mr-2">✓</span>
-                    <span>Feature three</span>
-                  </li>
+                  {tier.features?.map((feature: string, index: number) => (
+                    <li key={index} className="flex items-start text-slate-600 text-sm">
+                      <span className="mr-2">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             );
