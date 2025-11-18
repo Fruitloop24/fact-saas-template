@@ -22,7 +22,6 @@ export interface Env {
 	                                     // Example: "https://app.example.com,https://staging.example.com"
 	                                     // If not set, falls back to defaults (see CORS middleware)
 	USAGE_KV: KVNamespace;              // KV namespace binding (set in wrangler.toml)
-	TOKENS_KV: KVNamespace;             // KV namespace for user tier configs (multi-tenant)
 	CLERK_JWT_TEMPLATE: string;         // JWT template name (e.g., "pan-api")
 }
 

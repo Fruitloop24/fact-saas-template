@@ -48,8 +48,8 @@ export async function handleCreateCheckout(
 			return {};
 		}) as { tier?: string };
 
-		// Load price IDs from config (multi-tenant - uses userId from JWT)
-		const priceIdMap = await getPriceIdMap(env, userId);
+		// Load price IDs from config
+		const priceIdMap = await getPriceIdMap(env);
 
 		// Default to first available paid tier (dynamic!)
 		const firstPaidTier = Object.keys(priceIdMap).find(key => key !== 'free') || 'pro';
